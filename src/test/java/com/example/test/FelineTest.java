@@ -21,7 +21,7 @@ public class FelineTest {
 
 
     @Test
-    public void getFamilyTest() {
+    public void testGetFamily_shouldReturnFelineFamily() {
         Feline feline = new Feline();
         String actualFamily = feline.getFamily();
         assertEquals("Ожидалось другое семейство", EXPECTED_FAMILY, actualFamily);
