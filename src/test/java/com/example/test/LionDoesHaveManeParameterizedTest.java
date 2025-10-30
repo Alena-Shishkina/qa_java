@@ -37,7 +37,7 @@ public class LionDoesHaveManeParameterizedTest {
     }
 
     @Test
-    public void doesHaveManeTest() throws Exception {
+    public void testDoesHaveMane_shouldReturnMethodBooleanValueCorrectly() throws Exception {
         Lion lion = new Lion(gender, feline);
         boolean actual = lion.doesHaveMane();
         assertEquals(hashMane, actual);

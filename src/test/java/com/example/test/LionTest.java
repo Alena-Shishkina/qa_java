@@ -9,9 +9,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 
@@ -27,14 +28,23 @@ public class LionTest {
     Feline feline;
 
     @Test
-    public void getFoodTest() throws Exception {
+    public void testGetFood_shouldCallingMethodAnimalClass() throws Exception {
         Lion lion = new Lion(GENDER_MALE, feline);
         lion.getFood();
         verify(feline).getFood(Mockito.anyString());
     }
 
     @Test
-    public void doesHaveManeExceptionTest() {
+    public void testGetFood_shouldReturnAnimalFoodList() throws Exception {
+        Lion lion = new Lion(GENDER_MALE, feline);
+        List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
+        when(feline.getFood("Хищник")).thenReturn(expectedFood);
+        List<String> actualFood = lion.getFood();
+        assertEquals("Ожидался другой рацион", expectedFood, actualFood);
+    }
+
+    @Test
+    public void testDoesHaveMane_shouldReturnException() {
         try {
             new Lion(EXCEPTION_GENDER, feline);
         } catch (Exception exception) {
@@ -43,9 +53,17 @@ public class LionTest {
     }
 
     @Test
-    public void getKittensTest() throws Exception {
+    public void testGetKittens_shouldCallingMethodWithAnInputParameter() throws Exception {
         Lion lion = new Lion(GENDER_FEMALE, feline);
+        lion.getKittens(KITTENS_COUNT);
+        verify(feline).getKittens();
+
+    }
+
+    @Test
+    public void testGetKittens_shouldReturnWithAnInputQuantity() throws Exception {
         when(feline.getKittens()).thenReturn(2);
+        Lion lion = new Lion(GENDER_FEMALE, feline);
         int actualCountOfKittens = lion.getKittens(KITTENS_COUNT);
         assertEquals("Фактическое количество котят не соответствует ожидаемому", KITTENS_COUNT, actualCountOfKittens);
     }

@@ -27,14 +27,14 @@ public class CatTest {
     }
 
     @Test
-    public void getSoundTest() {
+    public void testGetSound_shouldReturnMeowSound() {
         String actualSound = cat.getSound();
-        assertEquals(CAT_SOUND, actualSound);
+        assertEquals("Ожидался звук: Мяу", CAT_SOUND, actualSound);
 
     }
 
     @Test
-    public void getFoodTest() throws Exception {
+    public void testGetFood_shouldCallEatMeatFromFeline() throws Exception {
         cat.getFood();
         verify(feline).eatMeat();
     }
